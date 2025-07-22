@@ -45,7 +45,6 @@ parts:
       mkdir -p $CRAFT_PRIME/opt/kafka-ui/config
 
       cp $CRAFT_STAGE/api/build/libs/* $CRAFT_PRIME/opt/kafka-ui/libs
-      cp $CRAFT_STAGE/api/src/main/resources/application-local.yml $CRAFT_PRIME/opt/kafka-ui/config
   base:
     plugin: nil
     stage-packages:
