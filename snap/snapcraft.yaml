@@ -32,6 +32,10 @@ apps:
       - network
       - network-bind
       - mount-observe
+  keytool:
+    command: usr/lib/jvm/java-21-openjdk-amd64/bin/keytool
+    plugs:
+      - mount-observe
 
 parts:
   kafka-ui:
