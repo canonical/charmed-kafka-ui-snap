@@ -43,6 +43,10 @@ parts:
     source: https://github.com/kafbat/kafka-ui.git
     build-packages:
     - openjdk-21-jdk
+    override-pull: |
+      craftctl default
+      # patching upstream bug
+      sed -i '/if (entry.name().contains("inter.broker.protocol.version")) {/,/}/d' api/src/main/java/io/kafbat/ui/service/ReactiveAdminClient.java
     override-build: |
       ./gradlew clean build -Pinclude-frontend=true -Pversion=${SNAPCRAFT_PROJECT_VERSION} -x test && cp -r ./* $CRAFT_PART_INSTALL
     stage: 
