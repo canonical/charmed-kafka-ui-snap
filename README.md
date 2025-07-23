@@ -1,7 +1,7 @@
 # Charmed Kafka UI snap repository.
 
-[![Snapcraft Badge](https://snapcraft.io/charmed-kafka-ui/badge.svg)](https://snapcraft.io/charmed-kafka-ui)
-[![Release](https://github.com/canonical/charmed-kafka-ui/actions/workflows/publish.yaml/badge.svg)](https://github.com/canonical/charmed-kafka-ui/actions/workflows/publish.yaml)
+[![Snapcraft Badge](https://snapcraft.io/charmed-kafka-ui-snap/badge.svg)](https://snapcraft.io/charmed-kafka-ui)
+[![Release](https://github.com/canonical/charmed-kafka-ui-snap/actions/workflows/publish.yaml/badge.svg)](https://github.com/canonical/charmed-kafka-ui-snap/actions/workflows/publish.yaml)
 
 ## Building
 
