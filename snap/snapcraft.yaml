@@ -1,11 +1,14 @@
-name: charmed-kafka-ui # you probably want to 'snapcraft register <name>'
-base: core24 # the base snap is the execution environment for this snap
-version: '1.2.0' # just for humans, typically '1.2+git' or '1.3.2'
-summary: Kafka UI snap # 79 char long summary
+name: charmed-kafka-ui
+base: core24
+version: '1.2.0'
+summary: Charmed Kafka UI for Charmed Operators
 description: |
-  snap for the kafka kafbat ui
-grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: strict # use 'strict' once you have the right plugs and slots
+  This is a snap that provides `kafbat/kafka-ui`, intended for use in the Charmed Kafka UI Charmed Operator.
+grade: stable
+confinement: strict
+
+platforms:
+  amd64:
 
 system-usernames:
   _daemon_: shared
@@ -45,7 +48,6 @@ parts:
       mkdir -p $CRAFT_PRIME/opt/kafka-ui/config
 
       cp $CRAFT_STAGE/api/build/libs/* $CRAFT_PRIME/opt/kafka-ui/libs
-      cp $CRAFT_STAGE/api/src/main/resources/application-local.yml $CRAFT_PRIME/opt/kafka-ui/config
   base:
     plugin: nil
     stage-packages:
