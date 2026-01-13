@@ -1,6 +1,6 @@
 name: charmed-kafka-ui
 base: core24
-version: '1.3.0'
+version: '1.4.2'
 summary: Charmed Kafka UI for Charmed Operators
 description: |
   This is a snap that provides `kafbat/kafka-ui`, intended for use in the Charmed Kafka UI Charmed Operator.
@@ -45,8 +45,7 @@ parts:
     - openjdk-21-jdk
     override-pull: |
       craftctl default
-      # patching upstream bug
-      sed -i '/if (entry.name().contains("inter.broker.protocol.version")) {/,/}/d' api/src/main/java/io/kafbat/ui/service/ReactiveAdminClient.java
+      git checkout v${SNAPCRAFT_PROJECT_VERSION}
     override-build: |
       ./gradlew clean build -Pinclude-frontend=true -Pversion=${SNAPCRAFT_PROJECT_VERSION} -x test && cp -r ./* $CRAFT_PART_INSTALL
     stage: 
