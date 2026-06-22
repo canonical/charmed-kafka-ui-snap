@@ -9,11 +9,13 @@ To build locally, use `snapcraft --debug`
 
 ## Using the snap
 
-Install the snap (e.g. `sudo snap install ./charmed-kafka-ui_1.2.0_amd64.snap --dangerous --devmode`).
+Install the snap (e.g. `sudo snap install ./charmed-kafka-ui_1.5.0_amd64.snap --dangerous --devmode`).
 
 To run the snap, you will require a running Kafka cluster. You can use the following:
 
-```bash
+### Kafka 3
+
+```shell
 # installing kafka cluster
 sudo snap install charmed-zookeeper --channel 3/edge
 sudo snap install charmed-kafka --channel 3/edge
@@ -21,13 +23,40 @@ sudo snap install charmed-kafka --channel 3/edge
 # copying default config
 sudo cp /snap/charmed-kafka/current/opt/kafka/config/server.properties /var/snap/charmed-kafka/current/etc/kafka/server.properties
 sudo cp /snap/charmed-zookeeper/current/opt/zookeeper/conf/zoo_sample.cfg /var/snap/charmed-zookeeper/current/etc/zookeeper/zoo.cfg
-sudo cp /snap/charmed-zookeeper/current/opt/kafka-ui/config/application-local.yml /var/snap/charmed-kafka/current/etc/kafka-ui/application-local.yml
+sudo cp /snap/charmed-kafka-ui/current/opt/kafka-ui/config/application-local.yml /var/snap/charmed-kafka-ui/current/etc/kafka-ui/application-local.yml
 
 # starting services
 sudo snap start charmed-zookeeper
 sleep 5
 sudo snap start charmed-kafka
 sleep 5
+sudo snap start charmed-kafka-ui.daemon
+```
+
+### Kafka 4
+
+Alternatively, use Kafka 4 wich ships standalone with KRaft.
+
+```shell
+sudo snap install charmed-kafka --channel 4/edge
+```
+
+Confifure Kafka snap:
+
+```shell
+sudo cp /snap/charmed-kafka/current/opt/kafka/config/server.properties /var/snap/charmed-kafka/current/etc/kafka/server.properties
+sudo sed -i '/log.dirs=/c\log.dirs=/var/snap/charmed-kafka/common/var/log/kafka' /var/snap/charmed-kafka/current/etc/kafka/server.properties
+
+uuid=$(sudo charmed-kafka.storage random-uuid)
+sudo charmed-kafka.storage format --standalone --cluster-id $uuid -c /var/snap/charmed-kafka/current/etc/kafka/server.properties
+
+sudo chown -R _daemon_:_daemon_ /var/snap/charmed-kafka/common/var/log/kafka
+```
+
+Starting services
+
+```shell
+sudo snap start charmed-kafka.daemon
 sudo snap start charmed-kafka-ui.daemon
 ```
 

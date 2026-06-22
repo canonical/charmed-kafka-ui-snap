@@ -1,6 +1,6 @@
 name: charmed-kafka-ui
 base: core24
-version: '1.4.2'
+version: '1.5.0'
 summary: Charmed Kafka UI for Charmed Operators
 description: |
   This is a snap that provides `kafbat/kafka-ui`, intended for use in the Charmed Kafka UI Charmed Operator.
@@ -21,7 +21,7 @@ hooks:
       - mount-observe
 
 environment:
-  JAVA_HOME: $SNAP/usr/lib/jvm/java-21-openjdk-amd64
+  JAVA_HOME: $SNAP/usr/lib/jvm/java-25-openjdk-amd64
 
 apps:
   daemon:
@@ -33,7 +33,7 @@ apps:
       - network-bind
       - mount-observe
   keytool:
-    command: usr/lib/jvm/java-21-openjdk-amd64/bin/keytool
+    command: usr/lib/jvm/java-25-openjdk-amd64/bin/keytool
     plugs:
       - mount-observe
 
@@ -42,7 +42,7 @@ parts:
     plugin: nil
     source: https://github.com/kafbat/kafka-ui.git
     build-packages:
-    - openjdk-21-jdk
+    - openjdk-25-jdk
     override-pull: |
       craftctl default
       git checkout v${SNAPCRAFT_PROJECT_VERSION}
@@ -58,7 +58,7 @@ parts:
   base:
     plugin: nil
     stage-packages:
-    - openjdk-21-jdk
+    - openjdk-25-jdk
     - util-linux
   wrapper:
     plugin: dump
