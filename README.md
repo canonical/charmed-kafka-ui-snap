@@ -35,7 +35,7 @@ sudo snap start charmed-kafka-ui.daemon
 
 ### Kafka 4
 
-Alternatively, use Kafka 4 wich ships standalone with KRaft.
+Alternatively, use Kafka 4 which ships standalone with KRaft.
 
 ```shell
 sudo snap install charmed-kafka --channel 4/edge
